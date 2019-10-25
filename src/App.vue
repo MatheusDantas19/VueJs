@@ -1,18 +1,20 @@
 <template>
-  <div class="container">
-    <h1 class="text-center">Animais Vue js</h1>
+  <div>
+  <h1 class="text-center">Animais Vue js</h1> 
+  <input type="seach" v-on:input="filtro = $event.target.value" 
+  placeholder="Filtre por parte do título" class="filtro" > 
+    <section class="container bg-light">
+      <div class="row justify-content-center">
+      
+        <div v-for="foto in fotosComFiltro">
+          <meu-painel :titulo="foto.titulo">
+            <img class="card-img-top" :src="foto.url" :alt="foto.titulo">
+          </meu-painel>
 
-    <div class="row">
-
-      <div v-for = "foto in fotos" class="col-12 col-md-4  mb-3" >
-        
-        <meu-painel :titulo="foto.titulo">
-          <img class="rounded card-img-top" :src="foto.url" :alt="foto.titulo">
-        </meu-painel>
-
+        </div>
       </div>
-    </div>
 
+    </section>
   </div>
 </template>
 
@@ -27,10 +29,21 @@ export default {
 
   data(){
     return{
-      fotos:[]
+      fotos:[],
+      filtro:""
     }
   },
-
+  computed:{//metodo
+    fotosComFiltro(){
+      if(this.filtro){
+        //filtrar
+        let exp = new RegExp(this.filtro.trim(),"i")
+        return this.fotos.filter(foto => exp.test(foto.titulo))
+      }else{
+        return this.fotos
+      }
+    }
+  },
 
   created(){
     //alert("Criei o componente");
@@ -54,4 +67,9 @@ export default {
     border-color: darkred;
   }
 
+  .filtro{
+    display: block;
+    width: 50%;
+    margin: auto;
+  }
 </style>

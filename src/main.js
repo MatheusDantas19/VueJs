@@ -7,6 +7,7 @@ import VueResource from "vue-resource"
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+
 Vue.use(VueResource);
 Vue.use(BootstrapVue);
 
