@@ -1,75 +1,35 @@
 <template>
   <div>
-  <h1 class="text-center">Animais Vue js</h1> 
-  <input type="seach" v-on:input="filtro = $event.target.value" 
-  placeholder="Filtre por parte do título" class="filtro" > 
-    <section class="container bg-light">
-      <div class="row justify-content-center">
-      
-        <div v-for="foto in fotosComFiltro">
-          <meu-painel :titulo="foto.titulo">
-            <img class="card-img-top" :src="foto.url" :alt="foto.titulo">
-          </meu-painel>
-
-        </div>
-      </div>
-
-    </section>
+    <meu-menu></meu-menu>
+    <main class="corpo">
+      <!--Hora tem que exibir um componente, hora outro-->
+      <transition name="pagina"></transition>
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 
 <script>
-import Painel from "./components/shared/painel/Painel.vue";
+import Menu from "./components/menu/Menu";
 
 export default {
-
   components:{
-    "meu-painel":Painel
+    "meu-menu":Menu
   },
-
-  data(){
-    return{
-      fotos:[],
-      filtro:""
-    }
-  },
-  computed:{//metodo
-    fotosComFiltro(){
-      if(this.filtro){
-        //filtrar
-        let exp = new RegExp(this.filtro.trim(),"i")
-        return this.fotos.filter(foto => exp.test(foto.titulo))
-      }else{
-        return this.fotos
-      }
-    }
-  },
-
-  created(){
-    //alert("Criei o componente");
-    let promise = this.$http.get("http://localhost:3000/v1/fotos");
-    promise
-      .then(res => res.json())
-      .then(fotos => this.fotos = fotos, err => console.log(err))
-
-  }
 }
 
 </script>
 
 <style>
-  img{
-    height: 200px;
-    width: 300px;
+  .corpo{
+    font-family: Helvetica, sans-serif;
   }
 
-  .borda-cor-especial{
-    border-color: darkred;
+  .pagina-enter, .pagina-leave-active{
+    opacity: 0;
   }
 
-  .filtro{
-    display: block;
-    width: 50%;
-    margin: auto;
+  .pagina-enter-active, .pagina-leave-active{
+    transition: opacity .4s;
   }
 </style>
