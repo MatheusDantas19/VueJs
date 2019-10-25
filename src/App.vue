@@ -1,6 +1,6 @@
 <template>
   <div>
-    <meu-menu></meu-menu>
+    <meu-menu :rotas="routes"></meu-menu>
     <main class="corpo">
       <!--Hora tem que exibir um componente, hora outro-->
       <transition name="pagina"></transition>
@@ -11,11 +11,19 @@
 
 <script>
 import Menu from "./components/menu/Menu";
+import {routes} from "./router"; 
 
 export default {
   components:{
     "meu-menu":Menu
   },
+
+  data(){
+    return{
+      routes:routes
+    }
+  }
+
 }
 
 </script>
