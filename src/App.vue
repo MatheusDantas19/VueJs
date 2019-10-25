@@ -1,19 +1,32 @@
 <template>
   <div class="container">
-    <h1 class="text-center">OI</h1>
+    <h1 class="text-center">Animais Vue js</h1>
+
     <div class="row">
-      <div v-for = "foto in fotos" class="col-12 col-md-4">
-        <img class="rounded" :src="foto.url" :alt="foto.titulo">      
+
+      <div v-for = "foto in fotos" class="col-12 col-md-4  mb-3" >
+        
+        <meu-painel :titulo="foto.titulo">
+          <img class="rounded card-img-top" :src="foto.url" :alt="foto.titulo">
+        </meu-painel>
+
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
+import Painel from "./components/shared/painel/Painel.vue";
+
 export default {
+
+  components:{
+    "meu-painel":Painel
+  },
+
   data(){
     return{
-      titulo:"Gta 5",
       fotos:[]
     }
   },
@@ -37,5 +50,8 @@ export default {
     width: 300px;
   }
 
+  .borda-cor-especial{
+    border-color: darkred;
+  }
 
 </style>
