@@ -6,8 +6,9 @@
           <div class="row justify-content-center">
               <div v-for="foto in fotosComFiltro">
                   <meu-painel :titulo="foto.titulo">
-                      <imagem :titulo="foto.titulo" :url="foto.url"></imagem>
-                    </meu-painel>
+                    <imagem :titulo="foto.titulo" :url="foto.url"></imagem>
+                    
+                  </meu-painel>
                 </div>
             </div>
       </article>
@@ -17,12 +18,14 @@
 <script>
 import Painel from "../shared/painel/Painel";
 import ImagemResponsiva from "../shared/imagem-responsiva/ImagemResponsiva";
+import Botao from "../shared/botao/Botao";
 
 export default {
 
   components:{
     "meu-painel":Painel,
-    "imagem":ImagemResponsiva
+    "imagem":ImagemResponsiva,
+    "meu-botao":Botao
   },
 
   data(){
@@ -49,7 +52,6 @@ export default {
     promise
       .then(res => res.json())
       .then(fotos => this.fotos = fotos, err => console.log(err))
-
   }
 }
 

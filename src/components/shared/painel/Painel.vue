@@ -14,15 +14,35 @@
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
 
+    <meu-botao
+      tipo="button" 
+      rotulo="Remover" 
+      @botaoAtivado="remover($event)"
+      :confirmacao="false"
+      estilo="padrao">
+      </meu-botao>
+
   </div>   
 </template>
 
+
 <script>
+import Botao from '../../shared/botao/Botao'
+
 export default {
   props: ["titulo"],
   data(){
     return{
       visivel:true
+    }
+  },
+  components:{
+    "meu-botao":Botao,
+  },
+  methods:{
+    remover($event){
+      //alert($event)
+      alert(this.titulo)
     }
   }
 }
